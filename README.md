@@ -1,7 +1,7 @@
-Dashboard Overview
+                                                            Dashboard Overview
 The Kubeshark Dashboard provides a centralized interface for viewing, filtering, and analyzing Kubernetes network traffic. It displays real-time API streams, workload relationships, and traffic snapshots—all enriched with full Kubernetes context.
 
-Kubeshark Dashboard
+                                                           Kubeshark Dashboard
 
 API Stream
 The L7 API Stream displays cluster-wide API calls in real-time, or when viewing delayed dissected snapshots. Each call includes full Kubernetes context, operating system context, API metadata, and network payload.
