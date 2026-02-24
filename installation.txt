@@ -1,0 +1,8 @@
+#########   Kubeshark Installation  ########################
+
+1. curl -Lo kubeshark https://github.com/kubeshark/kubeshark/releases/latest/download/kubeshark_linux_amd64
+2. cd kubeshark
+3. sudo chmod +x kubeshark
+4. sudo mv kubeshark /usr/local/bin/
+5. kubeshark tap   (auto-detects local K8s)
+
