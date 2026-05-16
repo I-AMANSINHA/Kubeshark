@@ -19,20 +19,21 @@ rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
 
 -----------------------------------------------------------------------------------------------------------------------------------
 Note :- if this not works then you can use below one,
-# 1. Wipe the cluster clean
-minikube delete
 
-# 2. Boot Minikube with a blank network setting (Disables 'kindnet' and pauses configuration)
-minikube start --network-plugin=cni --cni=false
+1. Wipe the cluster clean
+- minikube delete
 
-# 3. Use your freshly installed CLI to deploy Cilium from scratch
-cilium install
+2. Boot Minikube with a blank network setting (Disables 'kindnet' and pauses configuration)
+- minikube start --network-plugin=cni --cni=false
 
-# 4. Enable the visual dashboard
-cilium hubble enable --ui
+3. Use your freshly installed CLI to deploy Cilium from scratch
+- cilium install
 
-# 5. now to start and monitor
-cilium hubble ui
+4. Enable the visual dashboard
+- cilium hubble enable --ui
+
+5. now to start and monitor
+- cilium hubble ui
 
 - using port 12000 (by default)
 
