@@ -37,3 +37,12 @@ Note :- if this not works then you can use below one,
 
 - using port 12000 (by default)
 
+6. View settings
+- cilium config view
+
+7. Check the real-time status of your eBPF engine and nodes
+- cilium status
+
+8. To set the namespace
+- kubectl config set-context --current --namespace=kube-system
+
