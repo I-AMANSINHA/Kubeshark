@@ -1,0 +1,5 @@
+<H1> Difference between Cilium(Hubble) and Kubeshark </H1>
+
+- Cilium (Hubble) :-  To check if your services are connected, map your network topology, monitor network latency, and find out if a firewall rule is blocking traffic.
+
+- Kubeshark :- Built for debugging, it cracks open the packet data payload, sees the actual data inside that POST request.
