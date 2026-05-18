@@ -10,10 +10,10 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - mydevsite.local
+    - mytestdemo.local
     secretName: my-tls-secret    #  Hooks up your 443 certificate secret
   rules:
-  - host: mydevsite.local        #  Your custom local domain
+  - host: mytestdemo.local        #  Your custom local domain
     http:
       paths:
       - path: /

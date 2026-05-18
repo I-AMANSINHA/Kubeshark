@@ -4,7 +4,7 @@
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout tls.key -out tls.crt \
-  -subj "/CN=mydevsite.local/O=Development"
+  -subj "/CN=mytestdemo.local/O=Development"
 
 # Push those local files into Kubernetes
 
@@ -13,3 +13,33 @@ kubectl create secret tls my-tls-secret --key=tls.key --cert=tls.crt
 # remove the from the local
 
 rm tls.key tls.crt
+
+# Kubernetes successfully received and secured your keys.
+
+kubectl get secrets
+
+# Without enabling this addon, your ingress.yaml file is just a piece of text sitting in your cluster
+
+minikube addons enable ingress
+
+# minikube tunnel is meant to keep loading. It functions as a persistent background routing process. A blank, blinking terminal cursor means the network tunnel is open and active.
+It grabs Ports 80 and 443 on your actual laptop interface (127.0.0.1)
+
+
+minikube tunnel
+
+# to change the controller's listening ports permanently
+
+kubectl patch deployment ingress-nginx-controller -n ingress-nginx --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/ports/1/hostPort", "value": 8443}]'
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+🌐 Browser (https://mytestdemo.local)
+       ⬇️ (Looks at hosts file)
+💻 Laptop Localhost (127.0.0.1:443)
+       ⬇️ (Caught by the active bridge)
+🚇 minikube tunnel 
+       ⬇️ (Pushed through the bubble wall)
+⚡ Ingress IP (192.168.49.2) 
+       ⬇️ (NGINX matches the name "mytestdemo.local")
+🎯 my-web-app Service ➡️ Pod
