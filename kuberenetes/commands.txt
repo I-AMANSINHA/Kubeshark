@@ -1,0 +1,15 @@
+
+
+# Command to create the keys
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout tls.key -out tls.crt \
+  -subj "/CN=mydevsite.local/O=Development"
+
+# Push those local files into Kubernetes
+
+kubectl create secret tls my-tls-secret --key=tls.key --cert=tls.crt
+
+# remove the from the local
+
+rm tls.key tls.crt

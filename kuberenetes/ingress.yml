@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dynamic-web-ingress
+  namespace: default
+  annotations:
+    # Forces HTTP traffic to instantly redirect to secure HTTPS Port 443
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - mydevsite.local
+    secretName: my-tls-secret    #  Hooks up your 443 certificate secret
+  rules:
+  - host: mydevsite.local        #  Your custom local domain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-web-app     #  Targets your running app service
+            port:
+              number: 80
+
