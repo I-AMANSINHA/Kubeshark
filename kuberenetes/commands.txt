@@ -8,29 +8,43 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 
 # Push those local files into Kubernetes
 
-kubectl create secret tls my-tls-secret --key=tls.key --cert=tls.crt
+- kubectl create secret tls my-tls-secret --key=tls.key --cert=tls.crt
 
 # remove the from the local
 
-rm tls.key tls.crt
+- rm tls.key tls.crt
 
 # Kubernetes successfully received and secured your keys.
 
-kubectl get secrets
+- kubectl get secrets
 
 # Without enabling this addon, your ingress.yaml file is just a piece of text sitting in your cluster
 
-minikube addons enable ingress
+- minikube addons enable ingress
 
 # minikube tunnel is meant to keep loading. It functions as a persistent background routing process. A blank, blinking terminal cursor means the network tunnel is open and active.
 It grabs Ports 80 and 443 on your actual laptop interface (127.0.0.1)
 
 
-minikube tunnel
+- "minikube tunnel" - Meant for type: LoadBalancer services
+- "minikube service <name>" - Meant for type: NodePort services
 
 # to change the controller's listening ports permanently
 
 kubectl patch deployment ingress-nginx-controller -n ingress-nginx --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/ports/1/hostPort", "value": 8443}]'
+
+# Ensure your port forward command is still running in its separate window
+
+- kubectl port-forward deployment/ingress-nginx-controller -n ingress-nginx 8443:443
+
+############  Hello Kubernetes-app ########
+"minikube ssh" - to directly access the node
+"sudo crictl ps" -  then use this inside node to see the list of containers
+"minikube service system-test-service -n kube-system" - is a built-in helper utility, acts as a automated network bridge for your local
+"cilium hubble-ui" - establish a secure, automated port-forward connection linking the cluster service directly to your local computer
+port - 12000
+"minikube dashboard" - Built-in GUI that usually groups resources by namespace.
+
 
 -----------------------------------------------------------------------------------------------------------------------------------
 
@@ -43,3 +57,8 @@ kubectl patch deployment ingress-nginx-controller -n ingress-nginx --type='json'
 ⚡ Ingress IP (192.168.49.2) 
        ⬇️ (NGINX matches the name "mytestdemo.local")
 🎯 my-web-app Service ➡️ Pod
+
+
+
+NOTE :- minikube tunnel is great when your laptop is a clean slate, but kubectl port-forward is the ultimate developer tool when you have local servers like Apache or XAMPP already running.
+Whenever you add, remove, or change a microservice path, you update your single ingress.yaml file and deploy it again.
