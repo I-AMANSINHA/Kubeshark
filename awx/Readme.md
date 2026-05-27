@@ -38,7 +38,7 @@ Step-9 : Launch and Log in to the Console
 - The PostgreSQL database instance is created automatically by default by the AWX Operator
 - kubectl get secret my-awx-admin-password -n awx -o jsonpath="{.data.password}" | base64 --decode; echo
 - minikube service my-awx-service -n awx
-- by default - 31926 uses
+- by default - 31926 port 
 
 
  
