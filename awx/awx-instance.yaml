@@ -1,0 +1,8 @@
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: my-awx
+  namespace: awx
+spec:
+  service_type: nodeport  # Opens your 30000+ port range for local laptop access
+
