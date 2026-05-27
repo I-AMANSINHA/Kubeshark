@@ -5,13 +5,20 @@ Step-1 : Install the AWX Operator (The Setup Framework)
 - kubectl create namespace awx
 
 Step-2 : create custom.yml file for configuration
+
 Step-3 : kubectl apply -k . 
+
 Step-4 : kubectl get pods -n awx 
+
 Step-5 : awx-instance.yaml (actual app)
+
 Step-6 : kubectl apply -f awx-instance.yaml 
+
 Step-7 : kubectl get pods -n awx -w
+
 Step-8 : Extract Your Decoded Admin Password 
 - kubectl get secret my-awx-admin-password -n awx -o jsonpath="{.data.password}" | base64 --decode; echo
+
 Step-9 : Launch and Log in to the Console
 - minikube service my-awx-service -n awx
 
@@ -34,4 +41,4 @@ Step-9 : Launch and Log in to the Console
 - by default - 31926 uses
 
 
-- 
+ 
