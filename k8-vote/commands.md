@@ -1,9 +1,13 @@
 <h1> Prometheus & Grafana </h1>
 
 Prometheus - for monitoring, metrics and logging
+
 Grafana - visualisation
+
 Helm = Prometheus + Grafana
+
 Kind - kubernetes in docker
+
 ArgoCD - get manifest file from github and deploy on node, GitOps
 
 Kind forces everything into Docker containers. A cluster node is literally just a container running on your machine.
@@ -13,30 +17,46 @@ Minikube traditionally creates a whole Virtual Machine (VM) via VirtualBox, VMwa
 Kind is like a disposable cup. It is built to start instantly, run an automated test in a CI/CD pipeline, and be deleted immediately.
 
 nodePort: 31001 ➔ External Port (The outside world uses this) (localhost)
+
 port: 5001 ➔ Service Port (Internal cluster apps use this) (Kubernetes Service)
+
 targetPort: 80 ➔ Container Port (The actual code application uses this) (Your App Code)
+
 Prometheus - time/series database
+
 Helm - k8s package manager
+
 Get Grafana 'admin' user password by running
+
 nodeExporter - tool to get the data from the nodes
+
 Prometheus query :- 
+
 {to check the cpu usage}
+
 sum (rate (container_cpu_usage_seconds_total{namespace="default"}[1m])) / sum (machine_cpu_cores) * 100
 {memory-check}
+
+
 sum (container_memory_usage_bytes{namespace="default"}) by (pod)
 
 {network-check}
+
 sum(rate(container_network_receive_bytes_total{namespace="default"}[5m])) by (pod)
+
 sum(rate(container_network_transmit_bytes_total{namespace="default"}[5m])) by (pod)
 
+
 Grafana - http://0.0.0.0:31000/ , user - admin, pass - prom-operator
+
 Prometheus - http://0.0.0.0:9099/
+
 Vote-app - http://0.0.0.0:500/
 
 
 Commands: -
-kind create cluster
-kind get clusters
+1. kind create cluster
+2. kind get clusters
 kind export kubeconfig --name kind
 kubectl config get-contexts
 kubectl get nodes
