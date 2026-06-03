@@ -57,32 +57,35 @@ Vote-app - http://0.0.0.0:500/
 Commands: -
 1. kind create cluster
 2. kind get clusters
-kind export kubeconfig --name kind
-kubectl config get-contexts
-kubectl get nodes
-kind delete cluster
-kind create cluster --config config.yml
-kubectl config use-context kind-dev-env (if you have multiple clusters)
-kubectl apply -f .
-kubectl get all
-helm repo list
-helm repo update
-kubectl create namespace monitoring
-kubectl --namespace monitoring get pods
-kubectl port-forward svc/kind-prometheus-kube-prome-prometheus -n monitoring 9099:9090 --address=0.0.0.0 &
-kubectl port-forward svc/kind-prometheus-grafana -n monitoring 31000:80 --address=0.0.0.0 &
-kubectl port-forward svc/vote 500:5000 --address=0.0.0.0 &
-kubectl logs deployment/name
-kubectl delete -f old-filename.yaml 
+3. kind export kubeconfig --name kind
+4. kubectl config get-contexts
+5. kubectl get nodes
+6. kind delete cluster
+7. kind create cluster --config config.yml
+8. kubectl config use-context kind-dev-env (if you have multiple clusters)
+9. kubectl apply -f .
+10. kubectl get all
+11. helm repo list
+12. helm repo update
+13. kubectl create namespace monitoring
+14. kubectl --namespace monitoring get pods
+15. kubectl port-forward svc/kind-prometheus-kube-prome-prometheus -n monitoring 9099:9090 --address=0.0.0.0 &
+16. kubectl port-forward svc/kind-prometheus-grafana -n monitoring 31000:80 --address=0.0.0.0 &
+17. kubectl port-forward svc/vote 500:5000 --address=0.0.0.0 &
+18. kubectl logs deployment/name
+19. kubectl delete -f old-filename.yaml 
 (If you have old, incorrect duplicate files in that directory, make sure to delete them from your folder first)
-docker stop $(docker ps -q --filter label=io.x-k8s.kind.cluster)
-docker start $(docker ps -a -q --filter label=io.x-k8s.kind.cluster)
-helm install kind-prometheus prometheus-community/kube-prometheus-stack --namespace monitoring --set prometheus.service.nodePort=30000 --set prometheus.service.type=NodePort --set grafana.service.nodePort=31000 --set grafana.service.type=NodePort --set alertmanager.service.nodePort=32000 --set alertmanager.service.type=NodePort --set prometheus-node-exporter.service.nodePort=32001 --set prometheus-node-exporter.service.type=NodePort
-kubectl --namespace monitoring get secrets kind-prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
-kubectl get secret --namespace monitoring -l app.kubernetes.io/component=admin-secret -o jsonpath="{.items[0].data.admin-password}" | base64 --decode ; echo
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo add stable https://charts.helm.sh/stable
-helm upgrade <YOUR-RELEASE-NAME> grafana/grafana -f grafana-pass.yaml -n <YOUR-NAMESPACE>
+
+20. docker stop $(docker ps -q --filter label=io.x-k8s.kind.cluster)
+21. docker start $(docker ps -a -q --filter label=io.x-k8s.kind.cluster)
+22. helm install kind-prometheus prometheus-community/kube-prometheus-stack --namespace monitoring --set prometheus.service.nodePort=30000 --set prometheus.service.type=NodePort --set grafana.service.nodePort=31000 --set grafana.service.type=NodePort --set alertmanager.service.nodePort=32000 --set alertmanager.service.type=NodePort --set prometheus-node-exporter.service.nodePort=32001 --set prometheus-node-exporter.service.type=NodePort
+
+23. kubectl --namespace monitoring get secrets kind-prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
+24. kubectl get secret --namespace monitoring -l app.kubernetes.io/component=admin-secret -o jsonpath="{.items[0].data.admin-password}" | base64 --decode ; echo
+
+25. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+26. helm repo add stable https://charts.helm.sh/stable
+27. helm upgrade <YOUR-RELEASE-NAME> grafana/grafana -f grafana-pass.yaml -n <YOUR-NAMESPACE>
 
 
 
