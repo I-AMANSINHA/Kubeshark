@@ -1,0 +1,12 @@
+spec:
+  type: NodePort
+  ports:
+  - name: standard-http
+    port: 80           # External service port
+    targetPort: 80     # Container port
+    nodePort: 30001    # Outer laptop gate
+  - name: alternate-http
+    port: 8080         # A different external service port (Must be unique!)
+    targetPort: 80     # It's okay to land on the same container port!
+    nodePort: 30002    # A different outer laptop gate
+
